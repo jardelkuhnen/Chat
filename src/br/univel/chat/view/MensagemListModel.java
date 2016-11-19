@@ -35,6 +35,6 @@ public class MensagemListModel extends AbstractListModel<String> {
 
 	public void adicionarMensagem(final Mensagem mensagem) {
 		this.mensagens.add(mensagem);
-		notifyAll();
+		fireIntervalAdded(this, mensagens.size() - 1, mensagens.size());
 	}
 }

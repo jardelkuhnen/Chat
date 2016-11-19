@@ -12,7 +12,7 @@ public class MainChat {
 	public static void main(String[] args) {
 
 		try {
-			new ChatServer(2500).iniciarServidor();
+			new ChatServer(1000).iniciarServidor();
 
 			DisplayController.getInstancia();
 

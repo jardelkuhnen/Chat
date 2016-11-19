@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
@@ -65,7 +66,9 @@ public class Display extends JFrame {
 		gbc_lstMensagem.fill = GridBagConstraints.BOTH;
 		gbc_lstMensagem.gridx = 0;
 		gbc_lstMensagem.gridy = 0;
-		contentPane.add(lstMensagem, gbc_lstMensagem);
+		JScrollPane scroll = new JScrollPane();
+		scroll.setViewportView(lstMensagem);
+		contentPane.add(scroll, gbc_lstMensagem);
 
 		JLabel lblNewLabel = new JLabel("Enviar para:");
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
@@ -106,6 +109,7 @@ public class Display extends JFrame {
 				if (e.getKeyCode() == KeyEvent.VK_ENTER) {
 
 					DisplayController.getInstancia().enviarMensagem();
+					txtMensagem.setText("");
 
 				}
 
