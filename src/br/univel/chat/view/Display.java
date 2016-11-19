@@ -7,7 +7,10 @@ import java.awt.Insets;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.Collection;
 
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -19,9 +22,9 @@ import javax.swing.border.EmptyBorder;
 public class Display extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField txtDestinatario;
 	private JTextField txtMensagem;
 	private JList<String> lstMensagem = new JList();
+	private JComboBox<String> cbDestinatarios;
 
 	/**
 	 * Launch the application.
@@ -78,14 +81,14 @@ public class Display extends JFrame {
 		gbc_lblNewLabel.gridy = 1;
 		contentPane.add(lblNewLabel, gbc_lblNewLabel);
 
-		txtDestinatario = new JTextField();
-		GridBagConstraints gbc_txtDestinatario = new GridBagConstraints();
-		gbc_txtDestinatario.insets = new Insets(0, 0, 5, 0);
-		gbc_txtDestinatario.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtDestinatario.gridx = 1;
-		gbc_txtDestinatario.gridy = 1;
-		contentPane.add(txtDestinatario, gbc_txtDestinatario);
-		txtDestinatario.setColumns(10);
+		cbDestinatarios = new JComboBox<String>();
+		GridBagConstraints gbc_cmbDestinatario = new GridBagConstraints();
+		gbc_cmbDestinatario.insets = new Insets(0, 0, 5, 0);
+		gbc_cmbDestinatario.fill = GridBagConstraints.HORIZONTAL;
+		gbc_cmbDestinatario.gridx = 1;
+		gbc_cmbDestinatario.gridy = 1;
+		cbDestinatarios.setModel(new DefaultComboBoxModel());
+		contentPane.add(cbDestinatarios, gbc_cmbDestinatario);
 
 		JLabel lblNewLabel_1 = new JLabel("Mensagem");
 		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
@@ -122,8 +125,18 @@ public class Display extends JFrame {
 		return lstMensagem;
 	}
 
-	public JTextField getTxtDestinatario() {
-		return txtDestinatario;
+	public String getDestinatario() {
+		return this.cbDestinatarios.getSelectedItem().toString();
+	}
+
+	public void atualizarDestiantarios(Collection<String> destinatarios) {
+
+		DefaultComboBoxModel<String> model = (DefaultComboBoxModel<String>) cbDestinatarios.getModel();
+		model.removeAllElements();
+		destinatarios.forEach(destinatario -> {
+			model.addElement(destinatario);
+		});
+
 	}
 
 	public JTextField getTxtMensagem() {
